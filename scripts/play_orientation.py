@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import rospy
+import rospkg
 import time
 
 from gazebo_op.gazebo_op import GazeboOp
@@ -12,8 +13,11 @@ def main():
     model_name = "person_walking"
     gz_com.pause_physics()
     gz_com.delete_model(model_name)
+    
+    rospack = rospkg.RosPack()
+    packge_path = rospack.get_path('gazebo_op')
 
-    data_file_path = "../config/orientation.csv"
+    data_file_path = packge_path + "/config/orientation.csv"
     df = pd.read_csv(data_file_path, header=None)
     orientation_data = df.values
 
