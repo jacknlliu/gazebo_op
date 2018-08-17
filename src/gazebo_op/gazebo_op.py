@@ -150,7 +150,7 @@ class GazeboOp(object):
     def generate_cylinder_model(self, model_size):
         pass
 
-    def spawn_model(self, model_name, initial_pose=None, is_basic_model=False):
+    def spawn_model(self, model_name, robot_ns=None, initial_pose=None, is_basic_model=False):
         try:
             sdf = None
             init_pose = Pose()
@@ -170,7 +170,7 @@ class GazeboOp(object):
             else:
                 sdf = generate_box_model([0.1, 0.2, 0.3])
             print("we set init pose is: {}".format(init_pose))
-            res = self.__spawn_model(model_name, sdf, "", init_pose, "world")
+            res = self.__spawn_model(model_name, sdf, robot_ns, init_pose, "world")
             rospy.loginfo("RES: " + str(res))
             self.__current_model_name = model_name
         except:
